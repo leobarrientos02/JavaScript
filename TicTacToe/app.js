@@ -32,14 +32,138 @@ function startGame(){
 
 function turnClick(square) {
     //console.log(square.target.id);
-    turn(square.target.id, Player1)
+    if(typeof origBoard[square.target.id] == 'number'){
+        turn(square.target.id, Player1)
+        if(!checkTie()) turn(bestSpot(), Player2);
+    }
 }
 
 function turn( squareId, player){
     origBoard[squareId] = player;
     document.getElementById(squareId).innerText = player;
+    let gameWon = checkWin(origBoard, player)
+    if ( gameWon) gameOver(gameWon)
 }
 
-//Logic
+function checkWin(board, player){
 
-//AI
+    let move = board.reduce((a,e,i) =>
+    (e===player) ? a.concat(i) : a, []);
+    let gameWon = null;
+    for(let [index, win] of winCombos.entries()){
+        if(win.every(elem => move.indexOf(elem) > -1)){
+            gameWon = {index: index, player: player};
+            break;
+        }
+    } 
+    return gameWon;
+}
+
+function gameOver(gameWon){
+    for(let index of winCombos[gameWon.index]){
+        document.getElementById(index).style.backgroundColor = 
+        gameWon.player == Player1 ? "blue" : "red"; 
+    }
+    for(var i = 0; i<cells.length;i++){
+        cells[i].removeEventListener('click',turnClick,false);
+    }
+    declareWinner(gameWon.player == Player1 ? "You Win!" : "You Lose!");
+}
+
+/* EASY AI
+function emptySquares(){
+    return origBoard.filter(s => typeof s == 'number');
+}
+function bestSpot(){
+    return emptySquares()[0];
+}
+
+function declareWinner(who){
+    document.querySelector(".endgame").style.display = "block";
+    document.querySelector(".endgame .text").innerText = who;
+}
+
+function checkTie(){
+    if(emptySquares().length == 0){
+        for(var i = 0; i < cells.length;i++){
+            cells[i].style.backgroundColor = "green";
+            cells[i].removeEventListener('click', turnClick, false);
+        }
+        declareWinner("Tie Game")
+            return true;
+        }
+        return false;
+}
+*/
+function emptySquares(){
+    return origBoard.filter(s => typeof s == 'number');
+}
+function bestSpot(){
+    return minimax(origBoard, Player2).index;
+}
+
+function declareWinner(who){
+    document.querySelector(".endgame").style.display = "block";
+    document.querySelector(".endgame .text").innerText = who;
+}
+
+function checkTie(){
+    if(emptySquares().length == 0){
+        for(var i = 0; i < cells.length;i++){
+            cells[i].style.backgroundColor = "green";
+            cells[i].removeEventListener('click', turnClick, false);
+        }
+        declareWinner("Tie Game!")
+            return true;
+        }
+        return false;
+}
+
+function minimax(newBoard, player){
+    var availSpots = emptySquares(newBoard);
+
+    if(checkWin(newBoard, player)){
+        return {score: -10};
+    } else if(checkWin(newBoard, Player2)){
+        return {score: 10};
+    } else if( availSpots.length === 0){
+        return {score:0};
+    }
+    var moves = [];
+    for(var i = 0; i < availSpots.length;i++ ){
+        var move = {};
+        move.index = newBoard[availSpots[i]];
+        newBoard[availSpots[i]] = player;
+
+        if(player == Player2){
+            var result = minimax(newBoard, Player1);
+            move.score = result.score;
+        }else{
+            var result = minimax(newBoard, Player2);
+            move.score = result.score;
+        }
+
+        newBoard[availSpots[i]] = move.index;
+        moves.push(move);
+    }
+
+    var bestMove;
+    if(player === Player2){
+        var bestScore = -10000;
+        for(var i = 0; i< moves.length;i++){
+            if(moves[i].score > bestScore){
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    }else{
+        var bestScore = 10000;
+        for(var i = 0; i < moves.length; i++){
+            if(moves[i].score < bestScore){
+                bestScore = moves[i].score;
+                bestMove = i;
+            }
+        }
+    }
+    return moves[bestMove];
+}
