@@ -8,6 +8,10 @@ body{
     height: 100vh;
     background: linear-gradient(rgb(47,150,163), rgb(48,62,143));
     font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 }
 
 td {
@@ -58,4 +62,52 @@ table tr td:last-child {
     border-radius: 8px;
     color: white;
     font-size: 2em;
+}
+.box {
+	display: flex;
+}
+
+.box .inner {
+	width: 400px;
+	height: 200px;
+	line-height: 200px;
+	font-size: 4em;
+	font-family: sans-serif;
+	font-weight: bold;
+	white-space: nowrap;
+	overflow: hidden;
+}
+
+.box .inner:first-child {
+	background-color: rgb(100, 205, 247);
+	color: rgb(62, 106, 109);
+	transform-origin: right;
+	transform: perspective(100px) rotateY(-15deg);
+}
+
+.box .inner:last-child {
+	background-color:rgb(24, 65, 141);
+	color: antiquewhite;
+	transform-origin: left;
+	transform: perspective(100px) rotateY(15deg);
+}
+
+.box .inner span {
+	position: absolute;
+	animation: marquee 5s linear infinite;
+}
+
+.box .inner:first-child span {
+	animation-delay: 2.5s;
+	left: -100%;
+}
+
+@keyframes marquee {
+	from {
+		left: 100%;
+	}
+
+	to {
+		left: -100%;
+	}
 }
