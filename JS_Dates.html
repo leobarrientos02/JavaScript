@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <body>
+      <h2>JavaScript Dates</h2>
+      <p> Using new Date()</p>
+
+      <p id="demo"></p>
+
+      <script>
+          var d= new Date();
+          document.getElementById("demo").innerHTML = d;
+      </script>
+
+      <p>Using new Date()</p>
+      <p id="demo2"></p>
+
+      <script>
+          var d2 = new Date(2020,5,20,10,30,33,0);
+          document.getElementById("demo2").innerHTML = d2;
+      </script>
+
+      <p>Using new Date(dateString)</p>
+      <p id="demo3"></p>
+
+      <script>
+          var d3 = new Date("December 18, 1997");
+          document.getElementById("demo3").innerHTML = d3;
+      </script>
+
+      <h2>Date Methods</h2>
+      <p>toUTCString</p>
+      <p id="demo4"></p>
+      <script>
+          var d4 = new Date();
+          document.getElementById("demo4").innerHTML = d4.toUTCString();
+      </script>
+
+      <p>toDateString</p>
+      <p id="demo5"></p>
+      <script>
+          var d5 = new Date();
+          document.getElementById("demo5").innerHTML = d5.toDateString();
+      </script>
+
+      <p>Date.parse</p>
+      <p id="demo6"></p>
+      <script>
+          var sec = Date.parse("December 18, 2021");
+          var d6 = new Date(sec);
+          document.getElementById("demo6").innerHTML = d6;
+      </script>
+
+
+    </body>
+</html>

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <h2>JavaScript Class</h2>
+
+        <p id="demo"></p>
+
+        <script>
+            class person {
+                constructor(firstName, lastName, age){
+                    this.firstName = firstName;
+                    this.lastName = lastName;
+                    this.age = age;
+                }
+                dateOfBirth(){
+                    let date = new Date();
+                    return date.getFullYear() - this.age;
+                }
+            }
+
+            person1 = new person("Leonel", "Barrientos", 23);
+            document.getElementById("demo").innerHTML = person1.firstName + " " + person1.lastName + " is " + person1.age + " years old.";
+        </script>
+
+    </body>
+</html>

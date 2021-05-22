@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p id="demo"></p>
+
+        <script>
+            var hello;
+            hello = () => "Hello World!";
+            document.getElementById("demo").innerHTML = hello();
+        </script>
+
+        <h3>Arrow Functions with Parameters</h3>
+        <p id="demo1"></p>
+        <script>
+            var hello;
+            hello = (person) => "Hello " + person;
+            document.getElementById("demo1").innerHTML = hello("Leonel Barrientos")
+        </script>
+    </body>
+</html>
