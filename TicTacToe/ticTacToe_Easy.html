@@ -6,14 +6,39 @@
     <title>TicTacToe</title>
 
     <link rel="stylesheet" href="style.css">
+    <style>
+        .button {
+          padding: 15px 25px;
+          font-size: 24px;
+          text-align: center;
+          cursor: pointer;
+          outline: none;
+          color: #fff;
+          background-color: rgb(24, 65, 141);
+          border: none;
+          border-radius: 15px;
+          box-shadow: 0 9px #999;
+        }
+        
+        .button:hover {background-color: rgb(24, 65, 141)}
+        
+        .button:active {
+          background-color: rgb(24, 65, 141);
+          box-shadow: 0 5px #666;
+          transform: translateY(4px);
+        }
+        </style>
 
 </head>
-<nav>
-
-</nav>
-
 <body>
 
+    <a href="ticTacToe.html">
+        <button style="position: relative; right: 350px; bottom: 55px;" class="button">Hard AI</button>
+    </a>
+    <a href="home.html">
+        <button style="position: relative; right: 520px; bottom: 112px;" class="button">Home</button>
+    </a>
+    
     <table>
         <tr>
             <td class="cell" id="0"></td>
@@ -38,10 +63,10 @@
     </div>
 
     <div class="box col-mt-4">
-        <div style="position: relative; Top: 190px;" class="inner">
+        <div style="position: relative; Top: 130px;" class="inner">
             <span>Tic Tac Toe</span>
         </div>
-        <div style="position: relative; Top: 190px;" class="inner">
+        <div style="position: relative; Top: 130px;" class="inner">
             <span>Tic Tac Toe</span>
         </div>
     </div>
